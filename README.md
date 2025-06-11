@@ -50,7 +50,7 @@ Para ejecutar este proyecto localmente:
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/hugo510/Visualizador-de-Medidas-Responsivas.git
+   git clone https://github.com/hugo510/gitpages_practica.git
    cd Visualizador-de-Medidas-Responsivas
    ```
 
