@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+
+      - name: Install, build, and upload your site
+        uses: withastro/action@v2
+        with:
+          path: . # La ubicación raíz de tu proyecto Astro dentro del repositorio. (opcional)
+          node-version: 20 # La versión específica de Node.js que debe ser utilizada para construir tu sitio. Por defecto es 20. (opcional)
+          package-manager: npm@latest # El gestor de paquetes de Node.js que debe ser utilizado para instalar dependencias y construir tu sitio. Detectado automáticamente basándose en tu lockfile. (opcional)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
