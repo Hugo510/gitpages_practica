@@ -1,0 +1,158 @@
+---
+---
+
+<div class="pixel-viz">
+  <div class="viz-header">
+    <h3>Visualización de Píxeles (px)</h3>
+    <p>Los píxeles son unidades de tamaño fijo que permanecen iguales independientemente del tamaño de la pantalla o las dimensiones del elemento padre.</p>
+  </div>
+  
+  <div class="viz-controls">
+    <label for="pixel-slider">Ajustar tamaño (px):</label>
+    <input type="range" id="pixel-slider" min="10" max="200" value="100" step="1">
+    <span id="pixel-value">100px</span>
+  </div>
+  
+  <div class="viz-output">
+    <div class="screen-simulation">
+      <div class="pixel-box" id="pixel-box"></div>
+      <p class="viz-note">↑ Esta caja tiene un ancho fijo en píxeles. Redimensiona la ventana del navegador y observa que mantiene el mismo tamaño absoluto.</p>
+    </div>
+  </div>
+  
+  <div class="viz-info">
+    <h4>Características Principales:</h4>
+    <ul>
+      <li>Unidad de medida fija y absoluta</li>
+      <li>1px no equivale a un píxel físico en pantallas de alta densidad</li>
+      <li>No escala con las preferencias del usuario o tamaños de contenedor</li>
+      <li>Ideal para dimensiones precisas y consistentes independientemente del contexto</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .pixel-viz {
+    padding: var(--spacing-3);
+  }
+  
+  .viz-header {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .viz-header h3 {
+    color: var(--color-primary-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .viz-controls label {
+    font-weight: 500;
+  }
+  
+  .viz-controls input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  #pixel-value {
+    font-family: monospace;
+    background-color: var(--color-primary-100);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-primary-700);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .viz-output {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .screen-simulation {
+    border: 2px dashed var(--color-neutral-300);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    overflow: auto;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+  }
+  
+  .pixel-box {
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-primary-500);
+    border-radius: var(--border-radius-sm);
+    transition: width 0.3s ease;
+    position: relative;
+  }
+  
+  .viz-note {
+    font-size: 0.9rem;
+    color: var(--color-neutral-600);
+    text-align: center;
+    max-width: 400px;
+  }
+  
+  .viz-info {
+    background-color: var(--color-primary-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-primary-500);
+  }
+  
+  .viz-info h4 {
+    color: var(--color-primary-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-info ul {
+    margin: 0;
+    padding-left: var(--spacing-3);
+  }
+  
+  .viz-info li {
+    margin-bottom: 4px;
+  }
+  
+  @media (max-width: 767px) {
+    .viz-controls {
+      flex-wrap: wrap;
+    }
+    
+    .viz-controls input[type="range"] {
+      width: 100%;
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pixelSlider = document.getElementById('pixel-slider') as HTMLInputElement;
+    const pixelValue = document.getElementById('pixel-value');
+    const pixelBox = document.getElementById('pixel-box');
+    
+    if (pixelSlider && pixelValue && pixelBox) {
+      pixelSlider.addEventListener('input', () => {
+        const value = (pixelSlider as HTMLInputElement).value;
+        pixelValue.textContent = `${value}px`;
+        pixelBox.style.width = `${value}px`;
+        pixelBox.style.height = `${value}px`;
+      });
+    }
+  });
+</script>

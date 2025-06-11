@@ -1,0 +1,358 @@
+---
+---
+
+<div class="percentage-viz">
+  <div class="viz-header">
+    <h3>Percentage (%) Units Visualization</h3>
+    <p>Percentage units are relative to their parent element's dimensions, creating flexible, responsive layouts.</p>
+  </div>
+  
+  <div class="viz-controls">
+    <div class="control-group">
+      <label for="parent-width">Parent Width:</label>
+      <input type="range" id="parent-width" min="200" max="800" value="500" step="10">
+      <span id="parent-width-value">500px</span>
+    </div>
+    
+    <div class="control-group">
+      <label for="percentage-value">Child Width (%):</label>
+      <input type="range" id="percentage-value" min="10" max="100" value="50" step="5">
+      <span id="percentage-display-value">50%</span>
+    </div>
+  </div>
+  
+  <div class="viz-output">
+    <div class="parent-container" id="parent-container">
+      <div class="child-element" id="child-element">
+        <p>This element's width is set as a percentage of its parent.</p>
+      </div>
+    </div>
+    <div class="measurement-display">
+      <div class="measurement-parent">
+        Parent: <span id="parent-actual-width">500px</span>
+      </div>
+      <div class="measurement-child">
+        Child: <span id="child-actual-width">250px</span> (<span id="child-percentage">50%</span> of parent)
+      </div>
+    </div>
+  </div>
+  
+  <div class="percentage-examples">
+    <h4>Common Percentage-Based Layouts</h4>
+    <div class="example-grid">
+      <div class="example-item">
+        <h5>25% - 75% Split</h5>
+        <div class="example-container">
+          <div class="example-col" style="width: 25%;">25%</div>
+          <div class="example-col" style="width: 75%;">75%</div>
+        </div>
+      </div>
+      
+      <div class="example-item">
+        <h5>Three Equal Columns</h5>
+        <div class="example-container">
+          <div class="example-col" style="width: 33.333%;">33.3%</div>
+          <div class="example-col" style="width: 33.333%;">33.3%</div>
+          <div class="example-col" style="width: 33.333%;">33.3%</div>
+        </div>
+      </div>
+      
+      <div class="example-item">
+        <h5>Responsive Cards</h5>
+        <div class="example-cards">
+          <div class="example-card">Card</div>
+          <div class="example-card">Card</div>
+          <div class="example-card">Card</div>
+          <div class="example-card">Card</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="viz-info">
+    <h4>Key Characteristics:</h4>
+    <ul>
+      <li>Always relative to the parent element's dimensions</li>
+      <li>Width percentages are based on parent's width, height on parent's height</li>
+      <li>Creates proportional layouts that adapt to container size</li>
+      <li>Ideal for responsive designs that need to maintain proportions</li>
+      <li>Common in grid systems and fluid layouts</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .percentage-viz {
+    padding: var(--spacing-3);
+  }
+  
+  .viz-header {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .viz-header h3 {
+    color: var(--color-success-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .control-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .control-group label {
+    font-weight: 500;
+    min-width: 140px;
+  }
+  
+  .control-group input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  #parent-width-value,
+  #percentage-display-value {
+    font-family: monospace;
+    background-color: var(--color-success-100);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-success-700);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .viz-output {
+    margin-bottom: var(--spacing-3);
+    border: 2px dashed var(--color-neutral-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2);
+    overflow: hidden;
+  }
+  
+  .parent-container {
+    background-color: var(--color-success-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-success-200);
+    width: 500px; /* Initial width, will be modified by JS */
+    margin: 0 auto;
+    transition: width 0.3s ease;
+  }
+  
+  .child-element {
+    background-color: var(--color-success-300);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-success-400);
+    width: 50%; /* Initial percentage, will be modified by JS */
+    transition: width 0.3s ease;
+  }
+  
+  .child-element p {
+    margin: 0;
+    text-align: center;
+    color: var(--color-success-900);
+    font-size: 0.9rem;
+  }
+  
+  .measurement-display {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+  }
+  
+  .measurement-parent,
+  .measurement-child {
+    font-family: monospace;
+  }
+  
+  .measurement-parent span,
+  .measurement-child span {
+    font-weight: 700;
+  }
+  
+  .percentage-examples {
+    margin-top: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .percentage-examples h4 {
+    color: var(--color-success-700);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-2);
+  }
+  
+  .example-item {
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-50);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  .example-item h5 {
+    margin-bottom: var(--spacing-1);
+    font-size: 0.9rem;
+    color: var(--color-neutral-700);
+  }
+  
+  .example-container {
+    display: flex;
+    height: 50px;
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+  }
+  
+  .example-col {
+    background-color: var(--color-success-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-success-900);
+  }
+  
+  .example-col:nth-child(even) {
+    background-color: var(--color-success-400);
+    color: white;
+  }
+  
+  .example-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+  }
+  
+  .example-card {
+    width: 48%;
+    height: 50px;
+    margin-bottom: 2%;
+    background-color: var(--color-success-300);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-success-900);
+  }
+  
+  .viz-info {
+    background-color: var(--color-success-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-success-500);
+  }
+  
+  .viz-info h4 {
+    color: var(--color-success-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-info ul {
+    margin: 0;
+    padding-left: var(--spacing-3);
+  }
+  
+  .viz-info li {
+    margin-bottom: 4px;
+  }
+  
+  @media (max-width: 850px) {
+    .parent-container {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const parentWidth = document.getElementById('parent-width');
+    const parentWidthValue = document.getElementById('parent-width-value');
+    const percentageValue = document.getElementById('percentage-value');
+    const percentageDisplayValue = document.getElementById('percentage-display-value');
+    const parentContainer = document.getElementById('parent-container');
+    const childElement = document.getElementById('child-element');
+    const parentActualWidth = document.getElementById('parent-actual-width');
+    const childActualWidth = document.getElementById('child-actual-width');
+    const childPercentage = document.getElementById('child-percentage');
+    
+    if (parentWidth && parentWidthValue && percentageValue && percentageDisplayValue && 
+        parentContainer && childElement && parentActualWidth && childActualWidth && childPercentage) {
+      
+      parentWidth.addEventListener('input', updateValues);
+      percentageValue.addEventListener('input', updateValues);
+      
+      function updateValues() {
+        // Convertir valores a enteros y validarlos
+        const pWidth = parseInt((parentWidth as HTMLInputElement)?.value || "500") || 500;  // Valor por defecto si hay error
+        const pctValue = parseInt((percentageValue as HTMLInputElement)?.value || "50") || 50;  // Valor por defecto si hay error
+        
+        // Actualizar los textos de visualización
+        parentWidthValue!.textContent = `${pWidth}px`;
+        percentageDisplayValue!.textContent = `${pctValue}%`;
+        
+        // Aplicar los valores al contenedor y al elemento hijo
+        parentContainer!.style.width = `${pWidth}px`;
+        childElement!.style.width = `${pctValue}%`;
+        
+        // Obtener el ancho real del contenedor (puede ser diferente si está restringido por CSS)
+        const actualParentWidth = parentContainer!.offsetWidth || pWidth;
+        parentActualWidth!.textContent = `${actualParentWidth}px`;
+        
+        // Calcular el ancho real del elemento hijo en píxeles
+        const childWidthPx = Math.round((actualParentWidth * pctValue) / 100);
+        childActualWidth!.textContent = `${childWidthPx}px`;
+        childPercentage!.textContent = `${pctValue}%`;
+      }
+      
+      // Inicializar
+      updateValues();
+      
+      /**
+       * Función debounce para limitar la frecuencia de ejecución de funciones
+       * @param {Function} func - Función a ejecutar después del tiempo de espera
+       * @param {number} wait - Tiempo de espera en milisegundos
+       * @return {Function} - Función con debounce aplicado
+       */
+      function debounce(func: (...args: any[]) => any, wait = 100) {
+        let timeout: ReturnType<typeof setTimeout> | undefined;
+        return function(this: unknown, ...args: any[]) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      }
+      
+      // Actualizar mediciones cuando cambie el tamaño de la ventana con debounce
+      window.addEventListener('resize', debounce(() => {
+        updateValues();
+      }));
+    }
+  });
+</script>

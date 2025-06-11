@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import IntroSection from '../components/IntroSection.astro';
+import UnitSection from '../components/UnitSection.astro';
+import PixelViz from '../components/visualizations/PixelViz.astro';
+import EmViz from '../components/visualizations/EmViz.astro';
+import RemViz from '../components/visualizations/RemViz.astro';
+import PercentageViz from '../components/visualizations/PercentageViz.astro';
+import ViewportViz from '../components/visualizations/ViewportViz.astro';
+import FrViz from '../components/visualizations/FrViz.astro';
+---
+
+<Layout title="Explorador de Unidades CSS - Entendiendo las Unidades de Diseño Responsivo">
+  <Header />
+  
+  <IntroSection />
+  
+  <UnitSection 
+    id="pixels" 
+    title="Píxeles (px)" 
+    description="Los píxeles son unidades de tamaño fijo que mantienen el mismo tamaño absoluto independientemente de otros factores. No son escalables, lo que los hace menos ideales para diseños responsivos, pero perfectos para un control preciso."
+    color="primary"
+    unit="px"
+    codeExample={`width: 200px;
+height: 150px;
+font-size: 16px;
+border: 1px solid black;`}>
+    <PixelViz />
+  </UnitSection>
+  
+  <UnitSection 
+    id="em" 
+    title="Unidades EM" 
+    description="Las unidades EM son relativas al tamaño de fuente de su elemento padre. Esto crea un efecto en cascada donde los elementos anidados con unidades em componen sus tamaños basados en sus padres."
+    color="secondary"
+    unit="em"
+    codeExample={`font-size: 1.2em; /* 1.2 veces el tamaño de fuente del padre */
+margin: 1em;    /* Igual al tamaño de fuente del elemento */
+padding: 0.5em; /* Mitad del tamaño de fuente del elemento */`}>
+    <EmViz />
+  </UnitSection>
+  
+  <UnitSection 
+    id="rem" 
+    title="Unidades REM" 
+    description="Las unidades REM (Root EM) son relativas al tamaño de fuente del elemento raíz (generalmente el elemento html). A diferencia de EM, REM siempre es relativo al mismo valor, haciéndolo más predecible para diseños responsivos."
+    color="accent"
+    unit="rem"
+    codeExample={`html {
+  font-size: 16px; /* Tamaño base para unidades rem */
+}
+h1 {
+  font-size: 2rem;  /* 32px (2 × 16px) */
+}
+p {
+  font-size: 1rem;  /* 16px */
+  margin: 1.5rem;   /* 24px (1.5 × 16px) */
+}`}>
+    <RemViz />
+  </UnitSection>
+  
+  <UnitSection 
+    id="percentage" 
+    title="Porcentaje (%)" 
+    description="Las unidades de porcentaje son relativas a las dimensiones de su elemento padre. Los porcentajes de ancho se basan en el ancho del padre, mientras que los porcentajes de altura se basan en la altura del padre."
+    color="success"
+    unit="%"
+    codeExample={`width: 50%;      /* 50% del ancho del padre */
+height: 75%;     /* 75% de la altura del padre */
+margin-left: 10%; /* 10% del ancho del padre */
+font-size: 120%;  /* 120% del tamaño de fuente del padre */`}>
+    <PercentageViz />
+  </UnitSection>
+  
+  <UnitSection 
+    id="viewport" 
+    title="Unidades de Viewport (vw/vh)" 
+    description="Las unidades de viewport son relativas a las dimensiones del navegador. Permiten diseños verdaderamente responsivos que se adaptan al tamaño de la pantalla en lugar de a sus elementos contenedores."
+    color="warning"
+    unit="vw/vh"
+    codeExample={`width: 50vw;  /* 50% del ancho del viewport */
+height: 50vh; /* 50% de la altura del viewport */
+font-size: 5vw; /* 5% del ancho del viewport */
+padding: 2vh 2vw; /* Vertical: 2% de la altura del viewport, Horizontal: 2% del ancho del viewport */`}>
+    <ViewportViz />
+  </UnitSection>
+  
+  <UnitSection 
+    id="fr" 
+    title="Unidades Fraccionarias (fr)" 
+    description="Las unidades fraccionarias se utilizan exclusivamente en diseños de CSS Grid para distribuir el espacio disponible. Crean cuadrículas flexibles donde el espacio se asigna proporcionalmente según las fracciones especificadas."
+    color="error"
+    unit="fr"
+    codeExample={`display: grid;
+grid-template-columns: 1fr 2fr 1fr; /* Tres columnas: 25%, 50%, 25% del espacio disponible */
+grid-template-rows: 100px 1fr;      /* Primera fila fija, espacio restante a la segunda fila */
+gap: 16px;`}>
+    <FrViz />
+  </UnitSection>
+  
+  <Footer />
+</Layout>

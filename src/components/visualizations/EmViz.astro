@@ -1,0 +1,245 @@
+---
+---
+
+<div class="em-viz">
+  <div class="viz-header">
+    <h3>Visualización de Unidades EM</h3>
+    <p>Las unidades EM son relativas al tamaño de fuente de su elemento padre, creando un efecto en cascada.</p>
+  </div>
+  
+  <div class="viz-controls">
+    <div class="control-group">
+      <label for="parent-font-size">Tamaño de Fuente del Padre:</label>
+      <input type="range" id="parent-font-size" min="10" max="30" value="16" step="1">
+      <span id="parent-font-value">16px</span>
+    </div>
+    
+    <div class="control-group">
+      <label for="em-value">Tamaño del Elemento Hijo (em):</label>
+      <input type="range" id="em-value" min="0.5" max="3" value="1.5" step="0.1">
+      <span id="em-display-value">1.5em</span>
+    </div>
+  </div>
+  
+  <div class="viz-output">
+    <div class="parent-element" id="parent-element">
+      <p>Este es el elemento padre con tamaño de fuente ajustable.</p>
+      <div class="child-element" id="child-element">
+        <p>Este elemento usa unidades em para su tamaño de fuente, relativo al padre.</p>
+      </div>
+      <div class="nested-child">
+        <p>Este es un hijo anidado que hereda el tamaño basado en em del padre y se ve afectado por la cascada.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="em-cascade-demo">
+    <h4>Efecto en Cascada de EM</h4>
+    <div class="cascade-container">
+      <div class="cascade-level" style="font-size: 1em;">
+        1em (Base: 16px)
+        <div class="cascade-level" style="font-size: 1.2em;">
+          1.2em (19.2px)
+          <div class="cascade-level" style="font-size: 1.2em;">
+            1.2em (23.04px)
+            <div class="cascade-level" style="font-size: 1.2em;">
+              1.2em (27.65px)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="viz-info">
+    <h4>Características Principales:</h4>
+    <ul>
+      <li>Relativo al tamaño de fuente del elemento padre</li>
+      <li>Crea un efecto acumulativo/multiplicador cuando se anida</li>
+      <li>1em equivale al tamaño de fuente actual del elemento</li>
+      <li>Bueno para mantener tamaños proporcionales dentro de los componentes</li>
+      <li>Puede ser impredecible debido a la herencia en cascada</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .em-viz {
+    padding: var(--spacing-3);
+  }
+  
+  .viz-header {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .viz-header h3 {
+    color: var(--color-secondary-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .control-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .control-group label {
+    font-weight: 500;
+    min-width: 140px;
+  }
+  
+  .control-group input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  #parent-font-value,
+  #em-display-value {
+    font-family: monospace;
+    background-color: var(--color-secondary-100);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-secondary-700);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .viz-output {
+    margin-bottom: var(--spacing-3);
+    border: 2px dashed var(--color-neutral-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2);
+    overflow: auto;
+  }
+  
+  .parent-element {
+    background-color: var(--color-secondary-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-secondary-200);
+    margin-bottom: var(--spacing-2);
+    font-size: 16px; /* Base size that will be changed by JS */
+  }
+  
+  .parent-element > p {
+    margin-bottom: var(--spacing-2);
+    font-weight: 500;
+  }
+  
+  .child-element {
+    background-color: var(--color-secondary-100);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-secondary-300);
+    margin-bottom: var(--spacing-2);
+    font-size: 1.5em; /* Will be adjusted via JS */
+  }
+  
+  .nested-child {
+    background-color: var(--color-secondary-200);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-secondary-400);
+    font-size: 1em; /* Inherits from parent */
+  }
+  
+  .em-cascade-demo {
+    margin-top: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .em-cascade-demo h4 {
+    color: var(--color-secondary-700);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .cascade-container {
+    padding: var(--spacing-2);
+  }
+  
+  .cascade-level {
+    padding: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+    background-color: var(--color-secondary-50);
+    border: 1px solid var(--color-secondary-200);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  .cascade-level .cascade-level {
+    margin-top: var(--spacing-2);
+  }
+  
+  .viz-info {
+    background-color: var(--color-secondary-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-secondary-500);
+  }
+  
+  .viz-info h4 {
+    color: var(--color-secondary-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-info ul {
+    margin: 0;
+    padding-left: var(--spacing-3);
+  }
+  
+  .viz-info li {
+    margin-bottom: 4px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Definimos los tipos adecuados desde el principio
+    const parentFontSize = document.getElementById('parent-font-size') as HTMLInputElement;
+    const parentFontValue = document.getElementById('parent-font-value') as HTMLElement;
+    const emValue = document.getElementById('em-value') as HTMLInputElement;
+    const emDisplayValue = document.getElementById('em-display-value') as HTMLElement;
+    const parentElement = document.getElementById('parent-element') as HTMLElement;
+    const childElement = document.getElementById('child-element') as HTMLElement;
+    
+    // Verificamos que todos los elementos existan
+    if (parentFontSize && parentFontValue && emValue && emDisplayValue && parentElement && childElement) {
+      parentFontSize.addEventListener('input', updateValues);
+      emValue.addEventListener('input', updateValues);
+      function updateValues() {
+        // Obtenemos los valores desde los inputs
+        const pFontSize = parentFontSize.value;
+        const eValue = emValue.value;
+        
+        // Actualizamos los elementos de visualización
+        parentFontValue.textContent = `${pFontSize}px`;
+        emDisplayValue.textContent = `${eValue}em`;
+        
+        // Aplicamos los tamaños a los elementos
+        parentElement.style.fontSize = `${pFontSize}px`;
+        childElement.style.fontSize = `${eValue}em`;
+        
+        // Calculamos el valor real en píxeles
+        const computedEmSize = parseFloat(pFontSize) * parseFloat(eValue);
+        emDisplayValue.textContent = `${eValue}em (${computedEmSize.toFixed(1)}px)`;
+      }
+      
+      // Inicializamos los valores
+      updateValues();
+    }
+  });
+</script>

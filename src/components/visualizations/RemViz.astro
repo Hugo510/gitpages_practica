@@ -1,0 +1,393 @@
+---
+---
+
+<div class="rem-viz">
+  <div class="viz-header">
+    <h3>Visualización de Unidades REM</h3>
+    <p>Las unidades REM son relativas al tamaño de fuente del elemento raíz (generalmente el elemento html), proporcionando un escalado consistente en todo el documento.</p>
+  </div>
+  
+  <div class="viz-controls">
+    <div class="control-group">
+      <label for="root-font-size">Tamaño de Fuente Raíz:</label>
+      <input type="range" id="root-font-size" min="12" max="24" value="16" step="1">
+      <span id="root-font-value">16px</span>
+    </div>
+    
+    <div class="control-group">
+      <label for="rem-value">Tamaño del Elemento (rem):</label>
+      <input type="range" id="rem-value" min="0.5" max="3" value="1.5" step="0.1">
+      <span id="rem-display-value">1.5rem</span>
+    </div>
+  </div>
+  
+  <div class="viz-output">
+    <div class="root-sizing-example">
+      <div class="example-container">
+        <div class="rem-element" id="rem-element">
+          <p>Este elemento usa unidades rem para su tamaño de fuente (relativo a la raíz).</p>
+        </div>
+        
+        <div class="nested-container">
+          <div class="parent-override">
+            <p>Este padre tiene un tamaño de fuente diferente: 24px</p>
+            <div class="rem-nested">
+              <p>¡Este elemento aún escala con rem (relativo a la raíz), no a su padre!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="rem-comparison">
+    <h4>Comparación REM vs EM</h4>
+    <div class="comparison-container">
+      <div class="comparison-group">
+        <h5>Padre: 20px</h5>
+        <div class="comparison-parent">
+          <div class="rem-box">1.5rem</div>
+          <div class="em-box">1.5em</div>
+        </div>
+      </div>
+      
+      <div class="comparison-legend">
+        <span class="rem-legend">■ REM: Siempre relativo a la raíz</span>
+        <span class="em-legend">■ EM: Relativo al padre</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="viz-info">
+    <h4>Características Principales:</h4>
+    <ul>
+      <li>Relativo al tamaño de fuente del elemento raíz (html)</li>
+      <li>Escalado consistente en todo el documento</li>
+      <li>No afectado por los tamaños de fuente de los elementos padre</li>
+      <li>Ideal para diseños responsivos que escalan todo proporcionalmente</li>
+      <li>Facilita el escalado global simplemente cambiando el tamaño de fuente raíz</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .rem-viz {
+    padding: var(--spacing-3);
+  }
+  
+  .viz-header {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .viz-header h3 {
+    color: var(--color-accent-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .control-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .control-group label {
+    font-weight: 500;
+    min-width: 140px;
+  }
+  
+  .control-group input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  #root-font-value,
+  #rem-display-value {
+    font-family: monospace;
+    background-color: var(--color-accent-100);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-accent-700);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .viz-output {
+    margin-bottom: var(--spacing-3);
+    border: 2px dashed var(--color-neutral-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2);
+    overflow: auto;
+  }
+  
+  .example-container {
+    background-color: var(--color-accent-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-accent-200);
+  }
+  
+  .rem-element {
+    background-color: var(--color-accent-100);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-accent-300);
+    margin-bottom: var(--spacing-2);
+    font-size: 1.5rem; /* Will be adjusted via JS */
+  }
+  
+  .nested-container {
+    margin-top: var(--spacing-2);
+  }
+  
+  .parent-override {
+    background-color: var(--color-accent-200);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-accent-400);
+    font-size: 24px; /* Intentionally different from root */
+  }
+  
+  .parent-override > p {
+    margin-bottom: var(--spacing-2);
+    font-weight: 500;
+  }
+  
+  .rem-nested {
+    background-color: var(--color-accent-100);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-accent-300);
+    font-size: 1.5rem; /* Will be adjusted via JS - same as parent element */
+  }
+  
+  .rem-comparison {
+    margin-top: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .rem-comparison h4 {
+    color: var(--color-accent-700);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .comparison-container {
+    padding: var(--spacing-2);
+  }
+  
+  .comparison-group {
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .comparison-group h5 {
+    margin-bottom: var(--spacing-1);
+    font-size: 1rem;
+    color: var(--color-neutral-700);
+  }
+  
+  .comparison-parent {
+    background-color: var(--color-neutral-100);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px dashed var(--color-neutral-400);
+    display: flex;
+    gap: var(--spacing-2);
+    font-size: 20px; /* Fixed parent size for demonstration */
+  }
+  
+  .rem-box, .em-box {
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    color: white;
+    min-width: 120px;
+  }
+  
+  .rem-box {
+    background-color: var(--color-accent-600);
+    font-size: 1.5rem;
+  }
+  
+  .em-box {
+    background-color: var(--color-secondary-600);
+    font-size: 1.5em;
+  }
+  
+  .comparison-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-1);
+    font-size: 0.875rem;
+  }
+  
+  .rem-legend {
+    color: var(--color-accent-700);
+  }
+  
+  .em-legend {
+    color: var(--color-secondary-700);
+  }
+  
+  .viz-info {
+    background-color: var(--color-accent-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-accent-500);
+  }
+  
+  .viz-info h4 {
+    color: var(--color-accent-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-info ul {
+    margin: 0;
+    padding-left: var(--spacing-3);
+  }
+  
+  .viz-info li {
+    margin-bottom: 4px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rootFontSize = document.getElementById('root-font-size');
+    const rootFontValue = document.getElementById('root-font-value');
+    const remValue = document.getElementById('rem-value');
+    const remDisplayValue = document.getElementById('rem-display-value');
+    const remElement = document.getElementById('rem-element');
+    const remNested = document.querySelectorAll('.rem-nested');
+    const htmlElement = document.documentElement;
+    
+    // Verificar que todos los elementos existan antes de continuar
+    if (rootFontSize && rootFontValue && remValue && remDisplayValue && remElement && remNested.length > 0 && htmlElement) {
+      // Store original HTML font size to restore later
+      const originalHtmlFontSize = getComputedStyle(htmlElement).fontSize;
+      
+      // Añadir manejadores de eventos con try-catch para mayor robustez
+      rootFontSize.addEventListener('input', () => {
+        try {
+          updateValues();
+        } catch (error) {
+          console.error('Error al actualizar valores de tamaño raíz:', error);
+        }
+      });
+      
+      remValue.addEventListener('input', () => {
+        try {
+          updateValues();
+        } catch (error) {
+          console.error('Error al actualizar valores rem:', error);
+        }
+      });
+      
+      function updateValues() {
+        // Obtener y validar valores con límites de seguridad
+        const minRootSize = 12;
+        const maxRootSize = 24;
+        const minRemValue = 0.5;
+        const maxRemValue = 3;
+        
+        try {
+          // Verificar que los elementos input son válidos antes de leer sus valores
+          if (!(rootFontSize instanceof HTMLInputElement) || !(remValue instanceof HTMLInputElement)) {
+            throw new Error("Los controles no son elementos de entrada válidos");
+          }
+          
+          let rFontSize = parseFloat(rootFontSize.value);
+          rFontSize = !isNaN(rFontSize) ? Math.max(minRootSize, Math.min(maxRootSize, rFontSize)) : 16;
+          
+          let rValue = parseFloat(remValue.value);
+          rValue = !isNaN(rValue) ? Math.max(minRemValue, Math.min(maxRemValue, rValue)) : 1;
+          
+          // Actualizar visualización con formato consistente
+          if (rootFontValue && rootFontValue instanceof HTMLElement) {
+            rootFontValue.textContent = `${rFontSize}px`;
+          }
+          
+          // Update root font size for the demo
+          if (htmlElement && htmlElement instanceof HTMLElement) {
+            htmlElement.style.fontSize = `${rFontSize}px`;
+          }
+          
+          // Update rem elements - validando existencia de cada elemento
+          if (remElement && remElement instanceof HTMLElement) {
+            remElement.style.fontSize = `${rValue}rem`;
+          }
+          
+          // Verificar que remNested es un NodeList válido antes de iterarlo
+          if (remNested && typeof remNested.forEach === 'function' && remNested.length > 0) {
+            remNested.forEach(el => {
+              if (el && el instanceof HTMLElement) {
+                el.style.fontSize = `${rValue}rem`;
+              }
+            });
+          }
+          
+          // Calculate actual pixel value for display - usando Math.round para mayor precisión visual
+          const computedRemSize = rFontSize * rValue;
+          const formattedPixelSize = Number.isFinite(computedRemSize) ? computedRemSize.toFixed(1) : "0";
+          
+          if (remDisplayValue) {
+            remDisplayValue.textContent = `${rValue}rem (${formattedPixelSize}px)`;
+          }
+        } catch (error) {
+          console.error('Error al actualizar valores:', error);
+        }
+      }
+      
+      // Initialize
+      try {
+        updateValues();
+      } catch (error) {
+        console.error('Error al inicializar valores:', error);
+      }
+      
+      // Restore original HTML font size when navigating away
+      try {
+        const vizElement = document.querySelector('.rem-viz');
+        if (vizElement) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting && htmlElement) {
+                htmlElement.style.fontSize = originalHtmlFontSize;
+              }
+            });
+          }, {
+            threshold: 0.1 // Umbral bajo para detectar cuando está casi fuera de vista
+          });
+          
+          observer.observe(vizElement);
+          
+          // Limpieza cuando el componente se desmonta (útil para SPA)
+          document.addEventListener('beforeunload', () => {
+            observer.disconnect();
+            htmlElement.style.fontSize = originalHtmlFontSize;
+          });
+        }
+      } catch (error) {
+        console.error('Error al configurar observer:', error);
+        // Restablecer el tamaño de fuente original en caso de error
+        htmlElement.style.fontSize = originalHtmlFontSize;
+      }
+    } else {
+      console.error('No se encontraron todos los elementos necesarios para la visualización REM');
+    }
+  });
+</script>

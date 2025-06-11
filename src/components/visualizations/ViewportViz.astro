@@ -1,0 +1,447 @@
+---
+---
+
+<div class="viewport-viz">
+  <div class="viz-header">
+    <h3>Visualización de Unidades de Viewport (vw/vh)</h3>
+    <p>Las unidades de viewport son relativas a las dimensiones del viewport del navegador, permitiendo diseños verdaderamente responsivos basados en el tamaño de la pantalla.</p>
+  </div>
+  
+  <div class="viz-controls">
+    <div class="control-group">
+      <label for="vw-value">Ancho (vw):</label>
+      <input type="range" id="vw-value" min="10" max="95" value="50" step="5">
+      <span id="vw-display-value">50vw</span>
+    </div>
+    
+    <div class="control-group">
+      <label for="vh-value">Alto (vh):</label>
+      <input type="range" id="vh-value" min="10" max="50" value="30" step="5">
+      <span id="vh-display-value">30vh</span>
+    </div>
+  </div>
+  
+  <div class="viz-output">
+    <div class="viewport-demo">
+      <div class="viewport-info">
+        <div>Tamaño Actual del Viewport: <span id="viewport-size">0 × 0</span></div>
+        <div>Tamaño del Elemento: <span id="element-size">0 × 0</span></div>
+        <div class="resize-hint">↓ Redimensiona tu navegador para ver cómo se adaptan las unidades de viewport ↓</div>
+      </div>
+      
+      <div class="viewport-element" id="viewport-element">
+        <p>Este elemento usa vw para el ancho y vh para la altura</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="viewport-examples">
+    <h4>Casos de Uso Comunes de Unidades de Viewport</h4>
+    <div class="example-grid">
+      <div class="example-item">
+        <h5>Secciones de Pantalla Completa</h5>
+        <div class="example-viewport">
+          <div class="example-fullscreen">
+            <span>100vw × 100vh</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-item">
+        <h5>Tamaño de Texto con vw</h5>
+        <div class="example-viewport">
+          <div class="example-text-sizing">
+            <span class="size-1">3vw</span>
+            <span class="size-2">5vw</span>
+            <span class="size-3">8vw</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-item">
+        <h5>Márgenes Responsivos</h5>
+        <div class="example-viewport">
+          <div class="example-margins">
+            <div class="margin-box">margen de 5vw</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="viewport-variants">
+    <h4>Variantes de Unidades de Viewport</h4>
+    <table class="variants-table">
+      <thead>
+        <tr>
+          <th>Unidad</th>
+          <th>Descripción</th>
+          <th>Caso de Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>vw</td>
+          <td>1% del ancho del viewport</td>
+          <td>Dimensionamiento horizontal relativo al ancho de la pantalla</td>
+        </tr>
+        <tr>
+          <td>vh</td>
+          <td>1% de la altura del viewport</td>
+          <td>Dimensionamiento vertical relativo a la altura de la pantalla</td>
+        </tr>
+        <tr>
+          <td>vmin</td>
+          <td>1% de la dimensión más pequeña del viewport</td>
+          <td>Dimensionamiento conservador que funciona en cualquier orientación</td>
+        </tr>
+        <tr>
+          <td>vmax</td>
+          <td>1% de la dimensión más grande del viewport</td>
+          <td>Cuando necesitas que los elementos sean relativamente más grandes</td>
+        </tr>
+        <tr>
+          <td>dvh</td>
+          <td>1% de la altura dinámica del viewport</td>
+          <td>Tiene en cuenta la UI dinámica del navegador en móviles</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="viz-info">
+    <h4>Características Principales:</h4>
+    <ul>
+      <li>Dimensionado relativo a las dimensiones del viewport, no a los elementos padre</li>
+      <li>Verdaderamente responsivo a cambios de tamaño de pantalla</li>
+      <li>1vw = 1% del ancho del viewport, 1vh = 1% de la altura del viewport</li>
+      <li>Ideal para diseños de pantalla completa, secciones hero y tipografía responsiva</li>
+      <li>vmin y vmax proporcionan dimensionamiento responsivo basado en la dimensión más pequeña o más grande del viewport</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .viewport-viz {
+    padding: var(--spacing-3);
+  }
+  
+  .viz-header {
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .viz-header h3 {
+    color: var(--color-warning-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .control-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .control-group label {
+    font-weight: 500;
+    min-width: 140px;
+  }
+  
+  .control-group input[type="range"] {
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  
+  #vw-display-value,
+  #vh-display-value {
+    font-family: monospace;
+    background-color: var(--color-warning-100);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-warning-700);
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  .viz-output {
+    margin-bottom: var(--spacing-3);
+    border: 2px dashed var(--color-neutral-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2);
+    overflow: hidden;
+  }
+  
+  .viewport-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+  
+  .viewport-info {
+    font-family: monospace;
+    font-size: 0.9rem;
+    background-color: var(--color-neutral-100);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .resize-hint {
+    font-style: italic;
+    color: var(--color-neutral-600);
+    margin-top: 4px;
+    text-align: center;
+  }
+  
+  .viewport-element {
+    background-color: var(--color-warning-400);
+    border-radius: var(--border-radius-sm);
+    width: 50vw; /* Initial vw, will be modified by JS */
+    height: 30vh; /* Initial vh, will be modified by JS */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-warning-900);
+    font-weight: 500;
+    text-align: center;
+    padding: var(--spacing-2);
+    margin: 0 auto;
+    transition: width 0.3s ease, height 0.3s ease;
+    overflow: auto;
+  }
+  
+  .viewport-examples {
+    margin-top: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .viewport-examples h4 {
+    color: var(--color-warning-700);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-2);
+  }
+  
+  .example-item {
+    padding: var(--spacing-2);
+    background-color: var(--color-neutral-50);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  .example-item h5 {
+    margin-bottom: var(--spacing-1);
+    font-size: 0.9rem;
+    color: var(--color-neutral-700);
+  }
+  
+  .example-viewport {
+    height: 150px;
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .example-fullscreen {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-warning-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-warning-900);
+  }
+  
+  .example-text-sizing {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-warning-50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .example-text-sizing span {
+    line-height: 1;
+    color: var(--color-warning-800);
+  }
+  
+  .size-1 {
+    font-size: 3vw;
+  }
+  
+  .size-2 {
+    font-size: 5vw;
+  }
+  
+  .size-3 {
+    font-size: 8vw;
+  }
+  
+  .example-margins {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-warning-50);
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .margin-box {
+    background-color: var(--color-warning-300);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-warning-900);
+  }
+  
+  .viewport-variants {
+    margin-top: var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-2);
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .viewport-variants h4 {
+    color: var(--color-warning-700);
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .variants-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .variants-table th, 
+  .variants-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-neutral-200);
+  }
+  
+  .variants-table th {
+    font-weight: 600;
+    background-color: var(--color-warning-50);
+  }
+  
+  .variants-table td:first-child {
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--color-warning-700);
+  }
+  
+  .viz-info {
+    background-color: var(--color-warning-50);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--color-warning-500);
+  }
+  
+  .viz-info h4 {
+    color: var(--color-warning-700);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .viz-info ul {
+    margin: 0;
+    padding-left: var(--spacing-3);
+  }
+  
+  .viz-info li {
+    margin-bottom: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .variants-table {
+      font-size: 0.8rem;
+    }
+    
+    .variants-table th, 
+    .variants-table td {
+      padding: 6px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const vwValue = document.getElementById('vw-value') as HTMLInputElement;
+    const vwDisplayValue = document.getElementById('vw-display-value');
+    const vhValue = document.getElementById('vh-value') as HTMLInputElement;
+    const vhDisplayValue = document.getElementById('vh-display-value');
+    const viewportElement = document.getElementById('viewport-element');
+    const viewportSize = document.getElementById('viewport-size');
+    const elementSize = document.getElementById('element-size');
+    
+    if (vwValue && vwDisplayValue && vhValue && vhDisplayValue && viewportElement && viewportSize && elementSize) {
+      
+      function updateViewportInfo() {
+        // Add null checks before using the elements
+        if (viewportSize && elementSize && vwValue && vhValue) {
+          // Update viewport size display
+          viewportSize.textContent = `${window.innerWidth}px × ${window.innerHeight}px`;
+          
+          // Calculate and update element size
+          const elWidth = Math.round((window.innerWidth * parseFloat(vwValue.value)) / 100);
+          const elHeight = Math.round((window.innerHeight * parseFloat(vhValue.value)) / 100);
+          elementSize.textContent = `${elWidth}px × ${elHeight}px (${vwValue.value}vw × ${vhValue.value}vh)`;
+        }
+      }
+      
+      vwValue.addEventListener('input', updateValues);
+      vhValue.addEventListener('input', updateValues);
+      
+      function updateValues() {
+        const widthVal = vwValue.value;
+        const heightVal = vhValue.value;
+        
+        if (vwDisplayValue) vwDisplayValue.textContent = `${widthVal}vw`;
+        if (vhDisplayValue) vhDisplayValue.textContent = `${heightVal}vh`;
+        
+        if (viewportElement) {
+          viewportElement.style.width = `${widthVal}vw`;
+          viewportElement.style.height = `${heightVal}vh`;
+        }
+        
+        updateViewportInfo();
+      }
+      
+      // Initialize
+      updateValues();
+      
+      // Update on window resize
+      window.addEventListener('resize', updateViewportInfo);
+    }
+  });
+</script>

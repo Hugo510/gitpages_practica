@@ -1,0 +1,285 @@
+---
+---
+
+<section id="intro" class="intro-section">
+  <div class="container">
+    <div class="intro-content">
+      <h1 class="intro-title fadeIn">Unidades CSS <span>Explorador</span></h1>
+      <p class="intro-subtitle fadeIn">Comprende visualmente las unidades de diseño responsivo</p>
+      
+      <div class="intro-description fadeIn">
+        <p>
+          Entender las unidades CSS es fundamental para crear diseños responsivos y flexibles.
+          Diferentes unidades sirven para distintos propósitos y se comportan de manera única en varios contextos.
+        </p>
+        <p>
+          Esta guía explica visualmente las unidades CSS más importantes para el diseño responsivo:
+          píxeles, em, rem, porcentajes, unidades de viewport y la unidad fr para diseños con grid.
+        </p>
+      </div>
+      
+      <div class="intro-units-overview fadeIn">
+        <div class="unit-card" data-unit="px">
+          <h3>px</h3>
+          <p>Unidad de tamaño fijo</p>
+        </div>
+        <div class="unit-card" data-unit="em">
+          <h3>em</h3>
+          <p>Relativo al padre</p>
+        </div>
+        <div class="unit-card" data-unit="rem">
+          <h3>rem</h3>
+          <p>Relativo a la raíz</p>
+        </div>
+        <div class="unit-card" data-unit="%">
+          <h3>%</h3>
+          <p>Porcentaje del padre</p>
+        </div>
+        <div class="unit-card" data-unit="vw/vh">
+          <h3>vw/vh</h3>
+          <p>Relativo al viewport</p>
+        </div>
+        <div class="unit-card" data-unit="fr">
+          <h3>fr</h3>
+          <p>Unidad fraccionaria para grid</p>
+        </div>
+      </div>
+      
+      <div class="intro-cta fadeIn">
+        <a href="#pixels" class="cta-button">Comenzar a Explorar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro-section {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-6) 0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-neutral-50) 100%);
+  }
+  
+  .intro-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .intro-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin: 0;
+    background: linear-gradient(90deg, var(--color-primary-700), var(--color-accent-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .intro-title span {
+    color: var(--color-neutral-800);
+    font-weight: 400;
+  }
+  
+  .intro-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-neutral-600);
+    margin: 0;
+  }
+  
+  .intro-description {
+    max-width: 800px;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  
+  .intro-description p {
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .intro-units-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-3);
+  }
+  
+  .unit-card {
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    background-color: white;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .unit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .unit-card h3 {
+    font-size: 1.75rem;
+    margin: 0 0 var(--spacing-1) 0;
+  }
+  
+  .unit-card p {
+    margin: 0;
+    color: var(--color-neutral-600);
+    font-size: 0.9rem;
+  }
+  
+  .unit-card[data-unit="px"] {
+    border-top: 4px solid var(--color-primary-500);
+  }
+  
+  .unit-card[data-unit="em"] {
+    border-top: 4px solid var(--color-secondary-500);
+  }
+  
+  .unit-card[data-unit="rem"] {
+    border-top: 4px solid var(--color-accent-500);
+  }
+  
+  .unit-card[data-unit="%"] {
+    border-top: 4px solid var(--color-success-500);
+  }
+  
+  .unit-card[data-unit="vw/vh"] {
+    border-top: 4px solid var(--color-warning-500);
+  }
+  
+  .unit-card[data-unit="fr"] {
+    border-top: 4px solid var(--color-error-500);
+  }
+  
+  .intro-cta {
+    margin-top: var(--spacing-4);
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: var(--spacing-2) var(--spacing-4);
+    background: linear-gradient(90deg, var(--color-primary-600), var(--color-accent-600));
+    color: white;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    text-decoration: none;
+    color: white;
+  }
+  
+  @media (max-width: 1024px) {
+    .intro-title {
+      font-size: 3rem;
+    }
+    
+    .intro-subtitle {
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .intro-section {
+      min-height: auto;
+      padding: var(--spacing-4) 0;
+    }
+    
+    .intro-title {
+      font-size: 2.25rem;
+    }
+    
+    .intro-subtitle {
+      font-size: 1.125rem;
+    }
+    
+    .intro-description {
+      font-size: 1rem;
+    }
+    
+    .intro-units-overview {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Animation timings for staggered entrance */
+  .intro-content > .fadeIn:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .intro-content > .fadeIn:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .intro-content > .fadeIn:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  
+  .intro-content > .fadeIn:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  
+  .intro-content > .fadeIn:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const unitCards = document.querySelectorAll('.unit-card');
+    
+    unitCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const unit = card.getAttribute('data-unit');
+        let sectionId;
+        
+        switch(unit) {
+          case 'px':
+            sectionId = 'pixels';
+            break;
+          case 'em':
+            sectionId = 'em';
+            break;
+          case 'rem':
+            sectionId = 'rem';
+            break;
+          case '%':
+            sectionId = 'percentage';
+            break;
+          case 'vw/vh':
+            sectionId = 'viewport';
+            break;
+          case 'fr':
+            sectionId = 'fr';
+            break;
+        }
+        
+        if (sectionId) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            window.scrollTo({
+              top: section.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  });
+</script>
