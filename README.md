@@ -1,6 +1,6 @@
 # Explorador de Unidades CSS
 
-![Versión](https://img.shields.io/badge/versión-0.1.0-blue)
+![Versión](https://img.shields.io/badge/versión-0.1.1-blue)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
 
 Una aplicación web educativa e interactiva que visualiza cómo funcionan las diferentes unidades CSS responsivas. Comprende visualmente cómo se comportan px, em, rem, %, vw/vh y fr en diferentes contextos y pantallas.
